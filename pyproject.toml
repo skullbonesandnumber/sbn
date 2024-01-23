@@ -30,8 +30,8 @@ sbnd = "sbn.__main__:daemoned"
 
 [project.urls]
 "home" = "https://pypi.org/project/sbn"
-"bugs" = "https://github.com/bthate/sbn/issues"
-"source" = "https://github.com/bthate/sbn"
+"bugs" = "https://github.com/skullbonesandnumber/sbn/issues"
+"source" = "https://github.com/skullbonesandnumber/sbn"
 
 
 [tool.setuptools]
