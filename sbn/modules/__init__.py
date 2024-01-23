@@ -7,7 +7,7 @@
 
 
 from . import cmd, irc, log, mdl, mod, mre, pwd, req, rss, slg, tdo, wsd
-from . import flt, thr
+from . import flt,rme,  thr
 
 def __dir__():
     return (
@@ -20,6 +20,7 @@ def __dir__():
         'mre',
         'pwd',
         'req',
+        'rme',
         'rss',
         'slg',
         'tdo',

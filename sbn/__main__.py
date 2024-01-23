@@ -124,6 +124,8 @@ def wrap(func):
 def main():
     Storage.skel()
     parse_command(Cfg, " ".join(sys.argv[1:]))
+    if "h" in Cfg.opts:
+        return cmnd("rme")
     if "x" in Cfg.opts:
         Cfg.mod += ",cmd,flt,mod,mre,pwd,req,thr"
     else:
