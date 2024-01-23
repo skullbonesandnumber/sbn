@@ -125,7 +125,7 @@ def main():
     Storage.skel()
     parse_command(Cfg, " ".join(sys.argv[1:]))
     if "x" in Cfg.opts:
-        Cfg.mod += ",cmd,flt,mod,mre,pwd,req,rme,thr"
+        Cfg.mod += ",cmd,flt,man,mod,mre,pwd,req,thr"
     else:
         Cfg.mod = ",".join(modules.__dir__())
     if "v" in Cfg.opts:
@@ -136,7 +136,7 @@ def main():
     csl = Console()
     if "h" in Cfg.opts:
         scan(modules, Cfg.mod)
-        cmnd("rme")
+        cmnd("man")
     if "c" in Cfg.opts:
         scan(modules, Cfg.mod, True, Cfg.sets.dis, True)
         csl.start()
