@@ -60,6 +60,7 @@
     sbn.modules.mre     more
     sbn.modules.pwd     sasl password
     sbn.modules.req	request
+    sbn.modules.rme     readme
     sbn.modules.rss     rich site syndicate
     sbn.modules.rst     rest server
     sbn.modules.slg     slogan
