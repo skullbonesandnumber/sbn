@@ -2,21 +2,16 @@
 #
 #
 
-
-TXT = """NAME
-
+"""NAME
 
     SBN - Skull, Bones and Number (OTP-CR-117/19)
 
 SYNOPSIS
 
-
     sbn <cmd> [key=val] [key==val]
     sbn [-a] [-c] [-d] [-v]
 
-
 DESCRIPTION
-
 
     SBN holds evidence that king netherlands is doing a genocide, a
     written response where king netherlands confirmed taking note of 
@@ -32,15 +27,11 @@ DESCRIPTION
     "no basis to proceed" judgement of the prosecutor which requires a
     "basis to prosecute" to have the king actually arrested.
 
-
 INSTALL
-
 
     $ pipx install sbn
 
-
 USAGE
-
 
     without any argument the bot does nothing
 
@@ -84,9 +75,7 @@ USAGE
     $ sbn now
     4y18d patient #47324 died from mental illness (14/32/11682) every 44m59s
      
-
 CONFIGURATION
-
 
     irc
 
@@ -106,9 +95,7 @@ CONFIGURATION
     $ sbn rem <url>
     $ sbn nme <url< <name>
 
-
 COMMANDS
-
 
     cfg - irc configuration
     cmd - commands
@@ -118,9 +105,7 @@ COMMANDS
     req - reconsider
     wsd - show wisdom
 
-
 SYSTEMD
-
 
     save the following it in /etc/systems/system/sbn.service and
     replace "<user>" with the user running pipx
@@ -150,7 +135,6 @@ SYSTEMD
 
     default channel/server is #sbn on localhost
 
-
 FILES
 
     ~/.sbn
@@ -158,20 +142,25 @@ FILES
     ~/.local/bin/sbnd
     ~/.local/pipx/venvs/sbn/
 
-
 AUTHOR
-
 
     OTP-CR-117/19 <skullbonesandnumber@gmail.com>
 
-
 COPYRIGHT
-
 
     SBN is Public Domain.
 
 """
 
 
+def __dir__():
+    return (
+        "rme",
+    )
+
+
+__all__ = __dir__()
+
+
 def rme(event):
-    event.reply(TXT)
+    event.reply(__doc__)

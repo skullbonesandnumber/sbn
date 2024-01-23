@@ -10,7 +10,7 @@ SYNOPSIS
 ::
 
     sbn <cmd> [key=val] [key==val]
-    sbn [-a] [-c] [-d] [-v]
+    sbn [-a] [-c] [-d] [-h] [-v]
 
 
 DESCRIPTION

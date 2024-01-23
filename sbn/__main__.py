@@ -124,10 +124,8 @@ def wrap(func):
 def main():
     Storage.skel()
     parse_command(Cfg, " ".join(sys.argv[1:]))
-    if "h" in Cfg.opts:
-        return cmnd("rme")
     if "x" in Cfg.opts:
-        Cfg.mod += ",cmd,flt,mod,mre,pwd,req,thr"
+        Cfg.mod += ",cmd,flt,mod,mre,pwd,req,rme,thr"
     else:
         Cfg.mod = ",".join(modules.__dir__())
     if "v" in Cfg.opts:
@@ -136,12 +134,15 @@ def main():
     if "d" in Cfg.opts:
         daemoned()
     csl = Console()
+    if "h" in Cfg.opts:
+        scan(modules, Cfg.mod)
+        cmnd("rme")
     if "c" in Cfg.opts:
         scan(modules, Cfg.mod, True, Cfg.sets.dis, True)
         csl.start()
         forever()
     if Cfg.otxt:
-        scan(modules, Cfg.mod, disable=Cfg.sets.dis)
+        scan(modules, Cfg.mod)
         return cmnd(Cfg.otxt)
 
 
