@@ -60,7 +60,7 @@ extensions = [
 # -- Options for HTML output -------------------------------------------------
 
 
-html_title = "Skull, Bones and Numner (OTP-CR-117/19)"
+html_title = "Skull, Bones and Number (OTP-CR-117/19)"
 html_style = 'sbn.css'
 html_static_path = ["_static"]
 html_css_files = ["sbn.css",]
