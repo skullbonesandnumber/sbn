@@ -54,7 +54,10 @@ USAGE
     $ sbn cmd
     cfg,cmd,mre,now,pwd
 
+    the cfg command configures irc
+
     $ sbn cfg
+    channel=#sbn commands=True nick=sbn port=6667 server=localhost
 
     start a console
 
