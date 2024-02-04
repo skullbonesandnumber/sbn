@@ -3,7 +3,7 @@
 
 .. raw:: html
 
-    <br>
+    <br><br>
 
 .. title:: About
 
@@ -24,7 +24,7 @@ stop), the prosecutor decided to call it a "no basis to proceed".
 
 .. raw:: html
 
-    <br>
+    <br><br>
     <center>
     <b>
 
