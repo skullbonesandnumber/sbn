@@ -95,7 +95,8 @@ class Output():
     def extend(channel, txtlist):
         if channel not in Output.cache:
             Output.cache[channel] = []
-        Output.cache[channel].extend(txtlist)
+        chanlist = getattr(Output.cache, channel)
+        chanlist.extend(txtlist)
 
     @staticmethod
     def gettxt(channel):

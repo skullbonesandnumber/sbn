@@ -94,6 +94,7 @@ def daemon(pidfile, verbose=False):
 
 
 def daemoned():
+    Cfg.mod = ",".join(modules.__dir__())
     daemon(Cfg.pidfile)
     privileges(Cfg.user)
     scan(modules, Cfg.mod, True)
