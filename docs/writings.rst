@@ -8,20 +8,6 @@
 .. title:: Writings
 
 
-.. raw:: html
-
-    <center>
-    <b>
-
-**WRITINGS**
-
-.. raw:: html
-
-    </b>
-    </center>
-    <br>
-
-
 **Email 1**
 
 

@@ -9,20 +9,6 @@
 .. title:: Reconsider
 
 
-.. raw:: html
-
-    <center>
-    <b>
-
-**OTP-CR-117/19**
-
-.. raw:: html
-
-    </b>
-    </center>
-    <br>
-
-
 | **Information and Evidence Unit**
 | **Office of the Prosecutor**
 | **Post Office Box 19519**

@@ -8,20 +8,6 @@
 .. title:: Manual
 
 
-.. raw:: html
-
-    <center>
-    <b>
-
-**MANUAL**
-
-.. raw:: html
-
-    </b>
-    </center>
-    <br>
-
-
 **NAME**
 
     **SBN** - Skull, Bones and Number (OTP-CR-117/19)

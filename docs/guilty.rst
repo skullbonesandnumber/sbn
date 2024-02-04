@@ -8,20 +8,6 @@
 .. title:: Guilty
 
 
-.. raw:: html
-
-    <center>
-    <b>
-
-**GUILTY**
-
-.. raw:: html
-
-    </b>
-    </center>
-    <br>
-
-
 .. _informed:
 
 
