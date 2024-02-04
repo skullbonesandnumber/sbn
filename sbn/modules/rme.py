@@ -113,7 +113,7 @@ SYSTEMD
     [Unit]
     Description=Skull, Bones and Number (OTP-CR-117/19)
     Requires=network-online.target
-     After=network-online.target
+    After=network-online.target
     
     [Service]
     Type=simple
@@ -125,6 +125,7 @@ SYSTEMD
     
     [Install]
     WantedBy=multi-user.target
+
 
     then run this
 
