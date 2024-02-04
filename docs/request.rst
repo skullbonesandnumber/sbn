@@ -4,20 +4,6 @@
 
     <br>
 
-.. raw:: html
-
-    <center>
-    <b>
-
-**REQUEST**
-
-.. raw:: html
-
-    </b>
-    </center>
-    <br>
-
-
 .. title:: Request
 
 
