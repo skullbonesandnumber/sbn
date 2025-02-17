@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sbn.readthedocs.io/_static/sitemap.xml
+Sitemap: https://skullbonesandnumber.github.io/_static/sitemap.xml
