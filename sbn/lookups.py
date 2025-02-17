@@ -21,6 +21,7 @@ NAMES = {
     "req": "sbn.modules.req",
     "res": "sbn.modules.rss",
     "rss": "sbn.modules.rss",
+    "slg": "sbn.modules.slg",
     "syn": "sbn.modules.rss",
     "thr": "sbn.modules.thr",
     "upt": "sbn.modules.upt",
