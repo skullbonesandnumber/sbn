@@ -1,161 +1,23 @@
 # This file is placed in the Public Domain.
-#
-# pylint: disable=C,R,W0105
+# pylint: disable=R0902
 
 
 "a clean namespace"
 
 
-import pathlib
-import json
-import os
-import _thread
-
-
-def __dir__():
-    return (
-        'Default',
-        'Object',
-        'cdir',
-        'construct',
-        'edit',
-        'fmt',
-        'fqn',
-        'items',
-        'keys',
-        'read',
-        'update',
-        'values',
-        'write'
-    )
-
-
-__all__ = __dir__()
-
-
-lock = _thread.allocate_lock()
-
-
-def cdir(pth) -> None:
-    if os.path.exists(pth):
-        return
-    pth = pathlib.Path(pth)
-    os.makedirs(pth, exist_ok=True)
-
-
 class Object:
 
-    def __contains__(self, key):
-        return key in dir(self)
-
-    def __iter__(self):
-        return iter(self.__dict__)
+    """ Object """
 
     def __len__(self):
         return len(self.__dict__)
-
-    def __repr__(self):
-        return dumps(self)
 
     def __str__(self):
         return str(self.__dict__)
 
 
-class Default(Object):
-
-    __slots__ = ("__default__",)
-
-    def __init__(self):
-        Object.__init__(self)
-        self.__default__ = ""
-
-    def __getattr__(self, key):
-        return self.__dict__.get(key, self.__default__)
-
-
-class ObjectDecoder(json.JSONDecoder):
-
-    def decode(self, s, _w=None):
-        val = json.JSONDecoder.decode(self, s)
-        if not val:
-            val = {}
-        return hook(val)
-
-    def raw_decode(self, s, idx=0):
-        return json.JSONDecoder.raw_decode(self, s, idx)
-
-
-def hook(objdict, typ=None):
-    if typ:
-        obj = typ()
-    else:
-        obj = Object()
-    construct(obj, objdict)
-    return obj
-
-
-def load(fpt, *args, **kw):
-    kw["cls"] = ObjectDecoder
-    kw["object_hook"] = hook
-    return json.load(fpt, *args, **kw)
-
-
-def loads(string, *args, **kw):
-    kw["cls"] = ObjectDecoder
-    kw["object_hook"] = hook
-    return json.loads(string, *args, **kw)
-
-
-class ObjectEncoder(json.JSONEncoder):
-
-    def default(self, o):
-        if isinstance(o, dict):
-            return o.items()
-        if isinstance(o, Object):
-            return vars(o)
-        if isinstance(o, list):
-            return iter(o)
-        if isinstance(
-                      o,
-                      (
-                       type(str),
-                       type(True),
-                       type(False),
-                       type(int),
-                       type(float)
-                      )
-                     ):
-            return o
-        try:
-            return json.JSONEncoder.default(self, o)
-        except TypeError:
-            return object.__repr__(o)
-
-    def encode(self, o) -> str:
-        return json.JSONEncoder.encode(self, o)
-
-    def iterencode(
-                   self,
-                   o,
-                   _one_shot=False
-                  ):
-        return json.JSONEncoder.iterencode(self, o, _one_shot)
-
-
-def dump(*args, **kw) -> None:
-    kw["cls"] = ObjectEncoder
-    return json.dump(*args, **kw)
-
-
-def dumps(*args, **kw) -> str:
-    kw["cls"] = ObjectEncoder
-    return json.dumps(*args, **kw)
-
-
-"methods"
-
-
-def construct(obj, *args, **kwargs):
+def construct(obj, *args, **kwargs) -> None:
+    """ initialise an already constructed object from arguments. """
     if args:
         val = args[0]
         if isinstance(val, zip):
@@ -168,7 +30,8 @@ def construct(obj, *args, **kwargs):
         update(obj, kwargs)
 
 
-def edit(obj, setter, skip=False):
+def edit(obj, setter, skip=False) -> None:
+    """ edit object with values from the setter. """
     for key, val in items(setter):
         if skip and val == "":
             continue
@@ -190,7 +53,8 @@ def edit(obj, setter, skip=False):
             setattr(obj, key, val)
 
 
-def fmt(obj, args=None, skip=None, plain=False):
+def fmt(obj, args=None, skip=None, plain=False) -> str:
+    """ format an object in a key-value string. """
     if args is None:
         args = keys(obj)
     if skip is None:
@@ -213,44 +77,50 @@ def fmt(obj, args=None, skip=None, plain=False):
     return txt.strip()
 
 
-def fqn(obj):
+def fqn(obj) -> str:
+    """ return full qualified name. """
     kin = str(type(obj)).split()[-1][1:-2]
     if kin == "type":
-        kin = obj.__name__
+        kin = f"{obj.__module__}.{obj.__name__}"
     return kin
 
 
-def items(obj):
-    if isinstance(obj, type({})):
+def items(obj) -> []:
+    """ return items. """
+    if isinstance(obj,type({})):
         return obj.items()
     return obj.__dict__.items()
 
 
-def keys(obj):
+def keys(obj) -> []:
+    """ return keys. """
     if isinstance(obj, type({})):
         return obj.keys()
     return list(obj.__dict__.keys())
 
 
-def read(obj, pth):
-    with lock:
-        with open(pth, 'r', encoding='utf-8') as ofile:
-            update(obj, load(ofile))
+def update(obj, data) -> None:
+    """ update and object with the data dict. """
+    if not isinstance(data, type({})):
+        obj.__dict__.update(vars(data))
+    else:
+        obj.__dict__.update(data)
 
 
-def update(obj, data, empty=True):
-    for key, value in items(data):
-        if empty and not value:
-            continue
-        setattr(obj, key, value)
-
-
-def values(obj):
+def values(obj) -> []:
+    """ return values. """
     return obj.__dict__.values()
 
 
-def write(obj, pth):
-    with lock:
-        cdir(os.path.dirname(pth))
-        with open(pth, 'w', encoding='utf-8') as ofile:
-            dump(obj, ofile)
+def __dir__():
+    return (
+        'Object',
+        'construct',
+        'edit',
+        'fmt',
+        'fqn',
+        'items',
+        'keys',
+        'update',
+        'values'
+    )

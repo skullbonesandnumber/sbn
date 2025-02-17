@@ -1,31 +1,31 @@
 # This file is placed in the Public Domain.
-#
-# pylint: disable=C,R,E0402
 
 
-"locate"
+"find"
 
 
-from .. import Storage, find, fmt
+import time
+
+
+from ..locater import find, fntime
+from ..objects import fmt
+from ..workdir import long, skel, types
+from ..utility import elapsed
 
 
 def fnd(event):
-    Storage.skel()
+    """ locate objects. """
+    skel()
     if not event.rest:
-        res = sorted([x.split('.')[-1].lower() for x in Storage.types()])
+        res = sorted([x.split('.')[-1].lower() for x in types()])
         if res:
             event.reply(",".join(res))
         return
     otype = event.args[0]
-    clz = Storage.long(otype)
-    if "." not in clz:
-        for fnm in Storage.types():
-            claz = fnm.split(".")[-1]
-            if otype == claz.lower():
-                clz = fnm
+    clz = long(otype)
     nmr = 0
-    for fnm, obj in find(clz, event.gets):
-        event.reply(f"{nmr} {fmt(obj)}")
+    for fnm, obj in list(find(clz, event.gets)):
+        event.reply(f"{nmr} {fmt(obj)} {elapsed(time.time()-fntime(fnm))}")
         nmr += 1
     if not nmr:
         event.reply("no result")

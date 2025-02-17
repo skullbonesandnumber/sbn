@@ -7,11 +7,21 @@
 
 .. title:: About
 
+.. raw:: html
+
+    <center><b>ABOUT</b></center><br>
+
 
 In 2018 i informed the king of the netherlands that what he calls
 medicine in his "care" laws are not medicine but poison. Proof of
-these medicine being poison were shown to the king, who's (personal)
-kabinet wrote back that "the king took note of what i have written".
+LD-50 tests showing Zyprexa, Haldol, Clozapine and Abilify are toxic
+substances were shown to the king, who's (personal) kabinet wrote back
+that "the king took note of what i have written".
+
+These LD-50 tests proven toxic substances make impotent, are both physical
+(contracted muscles) and mental (make people hallucinate) torture and kill
+members of the victim groups: Elderly, Handicapped, Criminals and
+Psychiatric patients.
 
 Using poison makes the care laws used in the netherlands to provide
 care to elderly and handicapped, criminals and psychiatric patients
@@ -24,7 +34,7 @@ stop), the prosecutor decided to call it a "no basis to proceed".
 
 .. raw:: html
 
-    <br><br>
+    <br>
     <center>
     <b>
 
@@ -36,6 +46,9 @@ to get the king in his cell and his genocide, thereby, stopped.
     </center>
     </b>
     <br>
+
+.. raw:: html
+
     <center>
 
 .. image:: skull3.png
@@ -45,4 +58,3 @@ to get the king in his cell and his genocide, thereby, stopped.
 .. raw:: html
 
     </center>
-    </b>

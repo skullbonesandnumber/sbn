@@ -15,15 +15,15 @@ body {
     font-size: 113%;
     background-color: #fff;
     color: #555;
-    margin: 30px;
-    padding: 00px;
+    margin: 20px;
+    padding: 0px 30px 10px 30px;
 }
 
 
 i {
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva',
                  'Verdana', sans-serif;
-    font-size: 90%;
+    font-size: 100%;
     background-color: #fff;
     color: #555;
     margin: 30px;
@@ -57,4 +57,16 @@ a.image-reference, a.image-reference:hover {
 
 style {
     text-decoration: none;
+}
+
+li > p:first-child {
+    margin-top: 0;
+}
+
+li > p:last-child {
+    margin-bottom: 0;
+}
+
+div.admonition dl {
+    margin-bottom: 0;
 }

@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
 # This file is placed in the Public Domain.
-#
-# pylint: disable=R,C,W0718,W0611,W0613,E0102,E0401,E0611,W0201,W0702,W0603
+# pylint: disable=C,W0603,W0718
 
 
-"created clients"
+"tinder"
 
 
-import inspect
 import os
-import profile
-import random
 import shutil
 import sys
 import termios
@@ -21,144 +17,159 @@ import _thread
 sys.path.insert(0, os.getcwd())
 
 
-from sbn import Client, Command, Default, Error, Event, Object
-from sbn import Storage, modules, scan
-from sbn import keys, laps, launch, parse_command, spl
+from sbn.clients import Buffered, Config
+from sbn.command import Commands, command, parse
+from sbn.excepts import errors, later
+from sbn.objects import Object, keys
+from sbn.package import Table
+from sbn.reactor import Event
+from sbn.threads import STARTTIME, launch
+from sbn.utility import elapsed
+from sbn.workdir import Workdir, skel
 
 
-STARTTIME = time.time()
+import sbn.modules as MODS
 
 
-Cfg = Default()
-Cfg.debug = True
-Cfg.mod =  ",".join(modules.__dir__())
-Cfg.name = "tinder"
-Cfg.silent = False
-Cfg.skip = ["debug",]
-Cfg.version = "60"
-Cfg.wd = ".test"
+Workdir.wdr  = ".test"
 
 
-Storage.wd = Cfg.wd
-
-
-paylock = _thread.allocate_lock()
-
-events = []
-
-
-param = Object()
-param.cfg = [
-    "server=localhost",
-    "nick=mekker",
-    "port=6697",
-    "commands=true",
-    ""]
-param.cmd = [""]
-param.dpl = ["hnrss title,summary,link"]
-param.mre = ["2"]
-param.nme = ["hnrss hackernews"]
-param.pwd = ["bart bla"]
-param.rem = ["hnrss"]
-param.rss = ["http://hnrss.org/newest"]
-param.ver = [""]
-
-
-class CLI(Client):
-
-    def say(self, channel, txt):
-        if "v" not in Cfg.opts:
-            return
-        cprint(txt)
-
-
-def consume(evts):
-    fixed = []
-    res = []
-    for evt in evts:
-        res.append(evt.wait())
-        if "v" in Cfg.opts and not evt.result:
-            print(f"no result for {evt.cmd}")
-        fixed.append(evt)
-    for fff in fixed:
-        try:
-            evts.remove(fff)
-        except ValueError:
-            continue
-    return res
-
-
-def cprint(txt):
-    print(txt.encode('utf-8', 'replace').decode())
-    sys.stdout.flush()
-
-
-def payload(clt) -> None:
-    cmds = list(keys(Command.cmds))
-    random.shuffle(cmds)
-    with paylock:
-        nmr = 0
-        for cmd in cmds:
-            for ex in getattr(param, cmd, [""]):
-                evt = Event()
-                evt.orig = object.__repr__(clt)
-                evt.txt = cmd + " " + ex
-                evt.type = "command"
-                clt.put(evt)
-                events.append(evt)
-                nmr += 1
-        return nmr
-
-
-def wrap(func) -> None:
-    old2 = None
-    try:
-        old2 = termios.tcgetattr(sys.stdin.fileno())
-    except termios.error:
-        pass
-    try:
-        func()
-    except (KeyboardInterrupt, EOFError):
-        print("")
-    finally:
-        if old2:
-            termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, old2)
+cfg = Config()
+cfg.index = 0
 
 
 lap = 1
 nrs = 1
 nrcommand = 1
-percall = 1
+percall   = 1
 
 
-def main() -> None:
-    global lap
+events = []
+paylock = _thread.allocate_lock()
+
+
+param = Object()
+param.log = ["bla", ""]
+param.cfg = ["cfg nick=mekker", ""]
+param.cmd = [""]
+param.dne = ["mekker", ""]
+param.dpl = ["hnrss title,url", ""]
+param.exp = ['']
+param.fnd = ["log", ""]
+param.imp = ["tests/feeds.opml", ""]
+param.mod = [""]
+param.mre = [""]
+param.nme = ["hnrss hackernews", ""]
+param.pwd = ["bla mekker", ""]
+param.rem = ["hnrss", ""]
+param.res = ["hnrss"]
+param.rss = ["http://hnrss.org/newest", ""]
+param.srv = [""]
+param.tdo = ["mekker", ""]
+param.thr = [""]
+param.ver = [""]
+
+
+class CLI(Buffered):
+
+    def __init__(self):
+        Buffered.__init__(self)
+        self.register("command", command)
+
+    def raw(self, txt):
+        if "v" in cfg.opts:
+            print(txt)
+
+
+def banner():
+    tme = time.ctime(time.time()).replace("  ", " ")
+    print(f"{Config.name.upper()} since {tme}")
+    print(",".join(sorted(keys(Commands.cmds))))
+
+
+def consume(evts):
+    done = []
+    for event in evts:
+        event.wait()
+        done.append(event)
+    for todo in done:
+        events.remove(todo)
+    return done
+
+
+def payload(clt):
+    nmr = 0
+    for cmdd in sorted(Commands.names.keys()):
+        for ex in getattr(param, cmdd, [""]):
+            event = Event()
+            event.txt = cmdd + " " + ex
+            event.type = "command"
+            events.append(event)
+            clt.put(event)
+            nmr += 1
+    return nmr
+
+
+def wrap(function):
+    old3 = None
+    try:
+        old3 = termios.tcgetattr(sys.stdin.fileno())
+    except termios.error:
+        pass
+    try:
+        function()
+    except (KeyboardInterrupt, EOFError):
+        pass
+    except Exception as ex:
+        later(ex)
+    finally:
+        if old3:
+            termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, old3)
+
+
+def main():
     global nrs
     global nrcommand
-    global percall
-    Error.output = cprint
-    for mod in scan(modules, Cfg.mod):
+    parse(cfg, " ".join(sys.argv[1:]))
+    for mod in Table.all(MODS):
+        Commands.scan(mod)
         mod.DEBUG = True
-    nrs = Cfg.index or 1
-    nrcommand = len(Command.cmds) or 1
-    cli = CLI()
-    cli.start()
+    nrcommand = len(Commands.cmds) or 1
+    if "v" in cfg.opts:
+        banner()
+        print("verbose is on")
+    if "f" not in cfg.opts:
+        if os.path.exists(Workdir.wdr):
+            shutil.rmtree(Workdir.wdr)
+    skel()
+    clt = CLI()
+    clt.start()
+    nrs = cfg.index or 1
+    thrs = []
     for _nr in range(nrs):
-        launch(payload, cli)
+        thrs.append(launch(payload, clt))
+    for thr in thrs:
+        thr.join()
     consume(events)
-    endtime = time.time()
-    lap = laps(endtime - STARTTIME)
-    percall = (endtime - STARTTIME)/(nrs * nrcommand)
+    clt.stop()
+    if "w" in cfg.opts:
+        clt.wait()
 
 
 if __name__ == "__main__":
-    if os.path.exists(Storage.wd):
-        shutil.rmtree(Storage.wd)
-    Storage.skel()
-    parse_command(Cfg, " ".join(sys.argv[1:]))
-    if "p" in Cfg.opts:
-        profile.runctx(main.__code__, globals(), locals())
-    else:
-        wrap(main)
-    Error.show()
-    print(f"{lap} {nrs} {nrcommand} {percall}")
+    wrap(main)
+    endtime = time.time()
+    lap = elapsed(endtime-STARTTIME)
+    percall = (endtime-STARTTIME)/(nrs*nrcommand)
+    if "v" in cfg.opts:
+        if not list(errors()):
+            print("no errors")
+        for line in errors():
+            print(line)
+        if events:
+            for evt in events:
+                print(evt)
+            print(f"{len(events)} events")
+        print(f"{lap} {nrs} {nrcommand} {percall}")
+    sys.stdout.flush()
+    sys.exit(0)

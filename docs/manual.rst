@@ -3,219 +3,184 @@
 
 .. raw:: html
 
-    <br>
+   <br><br>
+
 
 .. title:: Manual
 
 
+.. raw:: html
+
+    <center><b>MANUAL</b></center><br>
+
+
 **NAME**
 
-    **SBN** - Skull, Bones and Number (OTP-CR-117/19)
 
-
-**INSTALL**
-
-
-::
-
-    $ pipx install sbn
+    ``SBN`` - Since 4 March 2019
 
 
 **SYNOPSIS**
 
-::
 
-    sbn <cmd> [key=val] [key==val]
-    sbn [-a] [-c] [-d] [-v]
+    | ``sbn <cmd> [key=val] [key==val]``
+    | ``sbn -c [-ivw]``
+    | ``sbn -d`` 
+    | ``sbn -s``
 
 
 **DESCRIPTION**
 
-    **SBN** holds evidence that king
+
+    ``SBN`` holds evidence that king
     netherlands is doing a genocide, a
-    written response where king
+    :ref:`written response <king>` where king
     netherlands confirmed taking note
     of “what i have written”, namely
     :ref:`proof  <evidence>` that medicine
-    he uses in treatement laws like zyprexa,
-    haldol, abilify and clozapine are
-    poison that make impotent, is both
+    he uses in treatment laws like zyprexa,
+    haldol, abilify and clozapine are not medicine
+    but poison.
+
+    Poison that makes impotent, is both
     physical (contracted muscles) and
     mental (make people hallucinate)
     torture and kills members of the
-    victim groups :ref:`. <source>`
+    victim groups: Elderly, Handicapped, Criminals
+    and Psychiatric patients.
 
-    **SBN** contains :ref:`correspondence <writings>`
-    with the International Criminal Court,
-    asking for arrest of the king of
-    the netherlands, for the genocide
-    he is committing with his new
-    treatement laws.
+    ``SBN`` contains :ref:`correspondence
+    <writings>` with the International Criminal
+    Court, asking for arrest of the king of the
+    netherlands, for the genocide he is committing
+    with his new treatment laws.
 
-    Current status is "no basis to proceed" 
-    :ref:`judgement <guilty>` of the prosecutor
-    which requires a "basis to prosecute" to
-    have the king actually arrested.
+    Current status is a :ref:`"no basis to proceed"
+    <writings>` judgement of the prosecutor which
+    requires a :ref:`"basis to prosecute" <reconsider>`
+    to have the king actually arrested.
 
+
+**INSTALL**
+
+    | ``pipx install sbn``
+    | ``pipx ensurepath``
+
+    <new terminal>
+
+    | ``$ sbn srv > sbn.service``
+    | ``$ sudo mv sbn.service /etc/systemd/system/``
+    | ``$ sudo systemctl enable sbn --now``
+    |
+    | joins ``#sbn`` on localhost
 
 **USAGE**
 
     without any argument the bot does nothing
 
-    ::
-
-        $ sbn
-        $
+    | ``$ sbn``
+    | ``$``
 
     see list of commands
 
-    ::
-
-        $ sbn cmd
-        cfg,cmd,mre,now,pwd
-
+    | ``$ sbn cmd``
+    | ``cfg,cmd,dne,dpl,err,exp,imp,log,mod,mre,nme,``
+    | ``pwd,rem,req,res,rss,srv,syn,tdo,thr,upt``
 
     start a console
 
-    ::
+    | ``$ sbn -c``
+    | ``>``
 
-        $ sbn -c 
-        >
+    use -i to init modules
 
-    use -v for verbose
-
-    ::
-
-        $ sbn -cv
-        SBN started CV started Sat Dec 2 17:53:24 2023
-        >
+    | ``$ sbn -ci``
+    | ``>``
 
     start daemon
 
-    ::
+    | ``$ sbn -d``
+    | ``$``
 
-        $ sbnd
-        $ 
+    start service
 
+    | ``$ sbn -s``
+    |
+    | ``<runs until ctrl-c>``
 
     show request to the prosecutor
 
-    ::
+    | $ ``sbn req``
+    | Information and Evidence Unit
+    | Office of the Prosecutor
+    | Post Office Box 19519
+    | 2500 CM The Hague
+    | The Netherlands
 
-        $ sbn req
-        Information and Evidence Unit
-        Office of the Prosecutor
-        Post Office Box 19519
-        2500 CM The Hague
-        The Netherlands
+**COMMANDS**
 
-    show how many died in the WvGGZ
+    here is a list of available commands
 
-    ::
-
-        $ sbn now
-        4y18d patient #47324 died from mental illness (14/32/11682) every 44m59s
-    
+    | ``cfg`` - irc configuration
+    | ``cmd`` - commands
+    | ``dpl`` - sets display items
+    | ``err`` - show errors
+    | ``exp`` - export opml (stdout)
+    | ``imp`` - import opml
+    | ``log`` - log text
+    | ``mre`` - display cached output
+    | ``now`` - show genocide stats
+    | ``pwd`` - sasl nickserv name/pass
+    | ``rem`` - removes a rss feed
+    | ``res`` - restore deleted feeds
+    | ``req`` - reconsider
+    | ``rss`` - add a feed
+    | ``syn`` - sync rss feeds
+    | ``tdo`` - add todo item
+    | ``thr`` - show running threads
+    | ``upt`` - show uptime
 
 **CONFIGURATION**
 
     irc
 
-    ::
-
-        $ sbn cfg server=<server>
-        $ sbn cfg channel=<channel>
-        $ sbn cfg nick=<nick>
+    | ``$ sbn cfg server=<server>``
+    | ``$ sbn cfg channel=<channel>``
+    | ``$ sbn cfg nick=<nick>``
 
     sasl
 
-    ::
-
-        $ sbn pwd <nsvnick> <nspass>
-        $ sbn cfg password=<frompwd>
+    | ``$ sbn pwd <nsvnick> <nspass>``
+    | ``$ sbn cfg password=<frompwd>``
 
     rss
 
-    ::
+    | ``$ sbn rss <url>``
+    | ``$ sbn dpl <url> <item1,item2>``
+    | ``$ sbn rem <url>``
+    | ``$ sbn nme <url> <name>``
 
-        $ sbn rss <url>
-        $ sbn dpl <url> <item1,item2>
-        $ sbn rem <url>
-        $ sbn nme <url> <name>
+    opml
 
-
-**COMMANDS**
-
-    ::
-
-        cfg - irc configuration
-        cmd - commands
-        mre - displays cached output
-        now - show genocide stats
-        pwd - sasl nickserv name/pass
-        req - reconsider
-        wsd - show wisdom
-
-
-**SYSTEMD**
-
-    save the following it in /etc/systems/system/sbn.service
-    and replace "<user>" with the user running pipx
-
-    ::
- 
-        [Unit]
-        Description=Skull, Bones and Number (OTP-CR-117/19)
-        Requires=network-online.target
-        After=network-online.target
-
-        [Service]
-        Type=simple
-        User=<user>
-        Group=<user>
-        WorkingDirectory=/home/<user>/.sbn
-        ExecStart=/home/<user>/.local/pipx/venvs/sbn/bin/sbnd
-        RemainAfterExit=yes
-
-        [Install]
-        WantedBy=multi-user.target
-
-
-    then run this
-
-    ::
-
-        $ mkdir ~/.sbn
-        $ sudo systemctl enable sbn --now
-
-    default channel/server is #sbn on localhost
-
-
-**FILES**
-
-    ::
-
-        ~/.sbn
-        ~/.local/bin/sbn
-        ~/.local/bin/sbnd
-        ~/.local/pipx/venvs/sbn/
+    | ``$ sbn exp``
+    | ``$ sbn imp <filename>``
 
 
 **SOURCE**
 
+    source is at `https://github.com/bthate/sbn <https://github.com/bthate/sbn>`_
 
-   source code is :ref:`here <source>`
+**FILES**
 
+    | ``~/.sbn``
+    | ``~/.local/bin/sbn``
+    | ``~/.local/pipx/venvs/sbn/*``
 
 **AUTHOR**
 
-    ::
-
-        OTP-CR-117/19  <skullbonesandnumber@gmail.com>
-
+    | Bart Thate <bthate@dds.nl>
 
 **COPYRIGHT**
 
-    ::
-
-        SBN is Public Domain.
+    | ``SBN`` is Public Domain.
+    |

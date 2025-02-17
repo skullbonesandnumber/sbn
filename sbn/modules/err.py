@@ -1,22 +1,19 @@
 # This file is placed in the Public Domain.
-#
-# pylint: disable=C,R,E0402
 
 
-"status of bots"
+"errors"
 
 
-from .. import Error, Fleet
+from ..excepts import Errors
 
 
 def err(event):
+    """ show errors. """
     nmr = 0
-    for bot in Fleet.objs:
-        if 'state' in dir(bot):
-            event.reply(str(bot.state))
-            nmr += 1
-    event.reply(f"status: {nmr} errors: {len(Error.errors)}")
-    for exc in Error.errors:
-        txt = Error.format(exc)
-        for line in txt.split():
-            event.reply(line)
+    for line in Errors.errors:
+        event.reply(line.strip())
+        nmr += 1
+    if not nmr:
+        event.reply("no errors")
+        return
+    event.reply(f"found {nmr} errors.")

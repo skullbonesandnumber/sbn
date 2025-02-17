@@ -1,188 +1,54 @@
-NAME
-
-::
-
-    SBN - Skull, Bones and Number (OTP-CR-117/19)
-
-
-SYNOPSIS
-
-::
-
-    sbn <cmd> [key=val] [key==val]
-    sbn [-a] [-c] [-d] [-h] [-v]
-
-
-DESCRIPTION
-
-::
-
-    SBN holds evidence that king netherlands is doing a genocide, a
-    written response where king netherlands confirmed taking note of 
-    “what i have written”, namely proof that medicine he uses in
-    treatement laws like zyprexa, haldol, abilify and clozapine are
-    poison that make impotent, is both physical (contracted muscles)
-    and mental (make people hallucinate) torture and kills members
-    of the victim groups. 
-
-    SBN contains correspondence with the International Criminal Court,
-    asking for arrest of the king of the netherlands, for the genocide
-    he is committing with his new treatement laws. Current status is
-    "no basis to proceed" judgement of the prosecutor which requires a
-    "basis to prosecute" to have the king actually arrested.
-
-
-INSTALL
-
-
-::
-
-    $ pipx install sbn
-
-
-USAGE
-
-::
-
-    without any argument the bot does nothing
-
-    $ sbn
-    $
-
-    see list of commands
-
-    $ sbn cmd
-    cfg,cmd,mre,now,pwd
-
-    the cfg command configures irc
-
-    $ sbn cfg
-    channel=#sbn commands=True nick=sbn port=6667 server=localhost
-
-    start a console
-
-    $ sbn -c 
-    >
-
-    use -v for verbose
-
-    $ sbn -cv
-    SBN started CV started Sat Dec 2 17:53:24 2023
-    >
-
-    start daemon
-
-    $ sbnd
-    $ 
-
-    show request to the prosecutor
-
-    $ sbn req
-    Information and Evidence Unit
-    Office of the Prosecutor
-    Post Office Box 19519
-    2500 CM The Hague
-    The Netherlands
-
-    show how many died in the WvGGZ
-
-    $ sbn now
-    4y18d patient #47324 died from mental illness (14/32/11682) every 44m59s
-     
-
-CONFIGURATION
-
-
-::
-
-    irc
-
-    $ sbn cfg server=<server>
-    $ sbn cfg channel=<channel>
-    $ sbn cfg nick=<nick>
-
-    sasl
-
-    $ sbn pwd <nsvnick> <nspass>
-    $ sbn cfg password=<frompwd>
-
-     rss
-
-    $ sbn rss <url>
-    $ sbn dpl <url> <item1,item2>
-    $ sbn rem <url>
-    $ sbn nme <url< <name>
-
-
-COMMANDS
-
-
-::
-
-    cfg - irc configuration
-    cmd - commands
-    mre - displays cached output
-    now - show genocide stats
-    pwd - sasl nickserv name/pass
-    req - reconsider
-    wsd - show wisdom
-
-
-SYSTEMD
-
-
-::
-
-    save the following it in /etc/systems/system/sbn.service and
-    replace "<user>" with the user running pipx
-
-
-    [Unit]
-    Description=Skull, Bones and Number (OTP-CR-117/19)
-    Requires=network-online.target
-    After=network-online.target
-
-    [Service]
-    Type=simple
-    User=<user>
-    Group=<user>
-    WorkingDirectory=/home/<user>/.sbn
-    ExecStart=/home/<user>/.local/pipx/venvs/sbn/bin/sbnd
-    RemainAfterExit=yes
-
-    [Install]
-    WantedBy=multi-user.target
-
-
-    then run this
-
-    $ mkdir ~/.sbn
-    $ sudo systemctl enable sbn --now
-
-    default channel/server is #sbn on localhost
-
-
-FILES
-
-::
-
-    ~/.sbn
-    ~/.local/bin/sbn
-    ~/.local/bin/sbnd
-    ~/.local/pipx/venvs/sbn/
-
-
-AUTHOR
-
-
-::
-
-    OTP-CR-117/19 <skullbonesandnumber@gmail.com>
-
-
-COPYRIGHT
-
-
-::
-
-    SBN is Public Domain.
+| **Information and Evidence Unit**
+| **Office of the Prosecutor**
+| **Post Office Box 19519**
+| **2500 CM The Hague**
+| **The Netherlands** 
+|
+
+
+Hello Office of the Prosecutor, 
+
+
+i write you in the context of communications and claims under art.15 of 
+the Rome Statute. i want to inform the prosecutor that the king of the 
+netherlands and his government are commiting 3 of the 5 crimes defined 
+in the Rome Statute. 
+
+The dutch government has introduced three new forced care laws, the Wfz 
+(wet forensische zorg) for criminals, the WvGGZ (Wet verplichte GGZ) for 
+the disturbed and addicted and the Wzd (Wet zorg en dwang) for the 
+handicapped.
+
+Both the chamber suggesting these laws to the king and the king himself 
+have been informed about the fact the the substances administered under 
+these laws are proven to be poison.
+ 
+There is proof the medication used in forced treatements in the 
+netherlands are poison, see copies of the ECHA <`European Chemical Agency`>
+website for:
+
+(1) ``haldol``
+(2) ``clozapine``
+(3) ``zyprexa``
+(4) ``abilify``
+
+With the mass scale torture with poison the king of the netherlands and 
+his chamber:
+
+(1) kills
+(2) does grave bodily and mental harm
+(3) makes impotent
+
+on the following victim groups here in the Netherlands:
+
+(1) verslaafden (addicts)
+(2) bejaarden (elderly)
+(3) ggz patienten (psychiatric patients)
+(4) criminelen (criminials)
+(5) gehandicapten (handicapped)
+
+Since the members of the chamber and the king were aware that these
+medicine are poison at the time they voted for this law and the day the Wfz
+law took effect (1-1-2019), i ask the prosecutor to prosecute the king for
+making the commiting of the above mentioned crimes (killing, torture and
+impotent making) possible.

@@ -5,11 +5,11 @@
 # ruff: noqa: E402, E501
 
 
-"Skull, Bones and Number (OTP-CR-117/19)"
+"Since 4 March 2019"
 
 
 NAME = "sbn"
-VERSION = "41"
+VERSION = "115"
 
 
 import os
@@ -25,9 +25,6 @@ curdir = os.getcwd()
 sys.path.insert(0, os.path.join(curdir, "..", ".."))
 sys.path.insert(0, os.path.join(curdir, ".."))
 sys.path.insert(0, os.path.join(curdir))
-
-
-# -- Options for GENERIC output ---------------------------------------------
 
 
 project = NAME
@@ -51,52 +48,38 @@ pygments_style = 'colorful'
 extensions = [
               'sphinx.ext.autodoc',
               'sphinx.ext.autosummary',
-              'sphinx.ext.viewcode',
+              'sphinx.ext.duration',
+              'sphinx.ext.doctest',
+              'sphinx.ext.githubpages',
               'sphinx.ext.todo',
-              'sphinx.ext.githubpages'
+              'sphinx.ext.viewcode'
              ]
 
-
-# -- Options for HTML output -------------------------------------------------
-
-
-html_title = "Skull, Bones and Number (OTP-CR-117/19)"
+html_title = "Since 4 March 2019"
 html_style = 'sbn.css'
-html_static_path = ["_static"]
+html_static_path = ["_static", "_static/sbn.css", "files/sitemap.xml"]
 html_css_files = ["sbn.css",]
 html_short_title = "%s %s" % (NAME, VERSION)
-html_sidebars = {
-    '**': [
-        'about.html',
-        'searchbox.html',
-        'navigation.html',
-        'relations.html',
-    ]
-}
 html_theme = "alabaster"
 html_theme_options = {
-    'github_user': 'bthate',
-    'github_repo': NAME,
-    'github_button': False,
-    'github_banner': False,
-    'logo': 'skull.jpg',
+    'logo': 'skull3.png',
     'link': '#000',
     'link_hover': '#000',
     'nosidebar': True,
     'show_powered_by': False,
     'show_relbar_top': False,
-    'sidebar_width': 10,
+    'sidebar_width': '0px',
 }
-html_favicon = "skull.jpg"
-html_extra_path = []
+html_favicon = "skull3.png"
+html_extra_path = ["robots.txt"]
 html_last_updated_fmt = '%Y-%b-%d'
 html_additional_pages = {}
-html_domain_indices = False
-html_use_index = False
-html_split_index = False
+html_domain_indices = True
+html_use_index = True
+html_split_index = True
 html_show_sourcelink = False
 html_show_sphinx = False
-html_show_copyright = False
+html_show_copyright = True
 html_copy_source = False
 html_use_opensearch = 'http://%s.rtfd.io/' % NAME
 html_file_suffix = '.html'
@@ -111,37 +94,22 @@ intersphinx_cache_limit = 1
 
 rst_prolog = '''.. image:: genocide.png
     :width: 100%
-    :height: 2.6cm
+    :height: 2.4cm
     :target: index.html
-
 
 .. raw:: html
 
-    <center>
-    <i>
-    By law, with the use of poison,
-    killing, torturing, castrating, destroying,
-    in whole or in part,
-    all elderly and all handicapped (Wzd), all criminals (Wfz)
-    and all psychiatric patients (WvGGZ)
-    here in the Netherlands
-    </i>
-    </center>
-    <br>
-
+    <center><i>Elderly, Handicapped, Criminals, Wicked</i></center>
 
 '''
 
 rst_epilog = '''.. raw:: html
 
     <br>
-    <br>
-    <br>
     <center>
     <b>
 
-:ref:`about <about>` - :ref:`writings <writings>` - :ref:`reconsider <reconsider>` - :ref:`evidence <evidence>` - :ref:`guilty <guilty>`
-
+:ref:`reconsider <reconsider>` - :ref:`evidence <evidence>` - :ref:`guilty <guilty>` - :ref:`writings <writings>`
 
 .. raw:: html
 
@@ -150,11 +118,16 @@ rst_epilog = '''.. raw:: html
 
 '''
 
+
 autosummary_generate = True
 autodoc_default_flags = ['members', 'undoc-members', 'private-members', "imported-members"]
 autodoc_member_order = 'groupwise'
-autodoc_docstring_signature = True
+autodoc_docstring_signature = False
 autoclass_content = "class"
 nitpick_ignore = [
                   ('py:class', 'builtins.BaseException'),
                  ]
+
+
+def setup(app):
+    app.add_css_file('_static/sbn.css')
