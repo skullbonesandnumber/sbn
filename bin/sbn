@@ -238,7 +238,7 @@ After=network-online.target
 Type=simple
 User=%s
 Group=%s
-ExecStart=/home/%s/.local/bin/%s -s mod=irc,rss
+ExecStart=/home/%s/.local/bin/%s -s
 
 [Install]
 WantedBy=multi-user.target"""
